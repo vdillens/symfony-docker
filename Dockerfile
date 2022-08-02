@@ -3,6 +3,7 @@ FROM ubuntu:22.04
 LABEL maintainer="vdillens dillenschneider.v@gmail.com"
 
 ARG SERVER_HOSTNAME
+ARG DEBIAN_FRONTEND=noninteractive
 
 # update apt cache and upgrade
 RUN apt-get update && apt-get upgrade -y 
