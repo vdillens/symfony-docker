@@ -17,7 +17,8 @@ RUN apt-get install -y \
     curl \
     openssl \
     unzip \ 
-    acl
+    acl \
+    apt-utils
 
 # Installation PHP and dependancies
 RUN apt-get install -y \
@@ -43,7 +44,7 @@ RUN apt-get install -y \
 RUN npm install -g yarn
 
 # Installation of Apache
-RUN apt-get install \
+RUN apt-get install -y \
     apache2 \
     libapache2-mod-fcgid
 
