@@ -1,0 +1,14 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  web:
+    container_name: php_apache
+    build: .
+      args:
+        - SERVER_HOSTNAME=${SERVER_HOSTNAME}
+    ports:
+      - "8000:80"
+      - "8443:443"
+    volumes:
+      - ./apache-server.crt:/etc/apache2/ssl/certs/apache-server.crt
+      - ./apache-server.key:/etc/apache2/ssl/private/apache-server.key
+      - /var/www/html:/var/www/html
