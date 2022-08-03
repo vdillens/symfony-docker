@@ -50,7 +50,7 @@ RUN apt-get install -y \
     libapache2-mod-fcgid
 
 # Desactivate module mpm_prefork (incompatible with http2)
-RUN a2dismod php8.1 mpm_prefork
+RUN a2dismod mpm_prefork
 
 # Activate module mpm_event (if not, error with others modules)
 RUN a2enmod mpm_event \
@@ -64,11 +64,11 @@ RUN a2enmod mpm_event \
 RUN a2enconf php8.1-fpm
 
 # Apache certificates
-COPY website.conf /etc/apache2/sites-available/${SERVER_HOSTNAME}.conf
-RUN sed -i 's/__SERVER_HOSTNAME__/${SERVER_HOSTNAME}/g' /etc/apache2/sites-available/${SERVER_HOSTNAME}.conf
-RUN a2ensite ${SERVER_HOSTNAME}
-
+COPY website.conf "/etc/apache2/sites-available/${SERVER_HOSTNAME}.conf"
+RUN sed -i "s/__SERVER_HOSTNAME__/${SERVER_HOSTNAME}/g" /etc/apache2/sites-available/"${SERVER_HOSTNAME}".conf
+RUN a2ensite "${SERVER_HOSTNAME}"
 
 EXPOSE 80 443
 
-CMD apachectl -D FOREGROUND
+CMD service php8.1-fpm start ;  apachectl -D FOREGROUND
+#CMD tail -f /dev/null
