@@ -12,4 +12,4 @@ services:
     volumes:
       - ./apache-server.crt:/etc/apache2/ssl/certs/apache-server.crt
       - ./apache-server.key:/etc/apache2/ssl/private/apache-server.key
-      - /var/www/html:/var/www/html
+      - ${VOLUME_SYMFONY_FILES}:/var/www/html
