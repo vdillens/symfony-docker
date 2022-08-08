@@ -3,6 +3,7 @@ FROM ubuntu:22.04
 LABEL maintainer="vdillens dillenschneider.v@gmail.com"
 
 ARG SERVER_HOSTNAME
+ARG USER_ID
 ARG DEBIAN_FRONTEND=noninteractive
 
 # update apt cache and upgrade
@@ -67,6 +68,10 @@ RUN a2enconf php8.1-fpm
 COPY website.conf "/etc/apache2/sites-available/${SERVER_HOSTNAME}.conf"
 RUN sed -i "s/__SERVER_HOSTNAME__/${SERVER_HOSTNAME}/g" /etc/apache2/sites-available/"${SERVER_HOSTNAME}".conf
 RUN a2ensite "${SERVER_HOSTNAME}"
+
+# Change apache permissions for shared volume
+RUN usermod -u ${USER_ID} www-data
+RUN usermod -G staff www-data
 
 EXPOSE 80 443
 

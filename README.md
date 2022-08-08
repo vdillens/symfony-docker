@@ -28,8 +28,10 @@ Copy the file .env.dist to .env and customize the parameters inside :
 | Parameter | Type | Description | 
 |-----------|------|-------------|
 | SERVER_HOSTNAME | String | The hostname of your new apache server |
-| VOLUME_SYMFONY_FILES | String | The fodler where to setup your Symfony project server (default : /var/www/html)|
-
+| SERVER_HOST_HTTP_PORT | String | The port of the host where your project will be setup |
+| SERVER_HOST_HTTPS_PORT | String | The port of the host where your project will be setup in https |
+| VOLUME_SYMFONY_FILES | String | The fodler where your Symfony project server is on the host server|
+| UID | Numeric | The user id of the volume's owner |
 
 ### 4/ Set the hostname in your DNS or your host file
 
@@ -37,9 +39,9 @@ In order to access to your new server, you need to add the hostname in your DNS 
 
 ### 5/ Launch the docker
 
-You can now launch the docker with the command
+You can now launch the docker (in daemon) with the command
 
-    docker-compose up
+    docker-compose up -d
 
 ### 6/ Access to your server
 

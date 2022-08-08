@@ -6,9 +6,10 @@ services:
       context: .
       args:
         - SERVER_HOSTNAME=${SERVER_HOSTNAME}
+        - USER_ID=${UID}
     ports:
-      - "8000:80"
-      - "8443:443"
+      - "${SERVER_HOST_HTTP_PORT}:80"
+      - "${SERVER_HOST_HTTPS_PORT}:443"
     volumes:
       - ./apache-server.crt:/etc/apache2/ssl/certs/apache-server.crt
       - ./apache-server.key:/etc/apache2/ssl/private/apache-server.key
